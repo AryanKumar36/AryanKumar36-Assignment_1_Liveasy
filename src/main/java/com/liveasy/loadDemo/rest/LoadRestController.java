@@ -23,12 +23,13 @@ public class LoadRestController {
     public List<Load> findAll(){
         return loadService.findAll();
     }
-    @GetMapping("/{loadId}")
 
+    @GetMapping("/{loadId}")
     public ResponseEntity<Load> findById(@PathVariable Integer loadId)
             throws LoadNotFoundException {
         Load theLoad = loadService.findById(loadId)
                 .orElseThrow(() -> new LoadNotFoundException("Load not found with id :: " +loadId));
+
         return  new ResponseEntity<>(theLoad, HttpStatus.OK);
     }
 
@@ -85,9 +86,4 @@ public class LoadRestController {
         loadService.deleteById(loadId);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
-
-
-
-
-
 }
